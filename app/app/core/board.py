@@ -1,5 +1,5 @@
-from enums import *
-from piece import Piece
+from .enums import *
+from .piece import Piece
 import random
 
 def get_zobrist_vals(b):

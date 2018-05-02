@@ -1,5 +1,5 @@
-from enums import *
-from move import Move
+from .enums import *
+from .move import Move
 
 
 class Movegen(object):
