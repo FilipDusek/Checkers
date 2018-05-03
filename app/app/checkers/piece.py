@@ -1,4 +1,4 @@
-from enums import *
+from .utils.enums import *
 
 
 class Piece(object):

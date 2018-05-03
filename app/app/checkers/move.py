@@ -1,6 +1,6 @@
-from enums import *
-from board import Board
-from piece import Piece
+from .utils.enums import *
+from .board import Board
+from .piece import Piece
 
 
 def clone_board_state(board):

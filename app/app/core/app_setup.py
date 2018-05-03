@@ -1,20 +1,14 @@
-from flask import Flask, jsonify, request
-from helpers import *
-from board import Board
-from search import alphabetapicker
-import time
-import json
-
-app = Flask(__name__)
-
+import os
+from ..checkers import *
+from ..main import app
+from flask import jsonify, request, send_file
 
 @app.route('/')
 def index_route():
-	return app.send_static_file('index.html')
-
+    return send_file("../static/index.html")
 
 @app.route('/new')
-def hello_world():
+def new():
 	b = Board(True)
 	return jsonify(boardtojson(b))
 
@@ -27,7 +21,3 @@ def solve():
 	new_b = alphabetapicker(all_white_moves)
 	new_b.bprint()
 	return json.dumps(boardtojson(new_b))
-
-
-if __name__ == '__main__':
-	app.run(debug=True)

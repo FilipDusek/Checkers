@@ -1,3 +1,3 @@
-AI for checkers written for Python 3. Requires Flask. 
+AI for checkers written for Python 3. Requires Flask and Docker. 
 
-UI is available on `http://127.0.0.1:5000` after running `python server.py`.
+UI is available on `http://localhost/` after running `docker-compose up`.

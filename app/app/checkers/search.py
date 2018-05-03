@@ -1,5 +1,5 @@
-from cache import Cache
-from helpers import *
+from .cache import Cache
+from .utils.utils import *
 from collections import Counter
 
 
@@ -7,7 +7,6 @@ def score_board(b):
 	allfields = [b.get_piece(coord) for coord in b.iter_coords()]
 	allpiecetypes = [piece.ptype for piece in allfields if piece is not None]
 	c = Counter(allpiecetypes)
-	print(c)
 	score = (c[Piece_type.white_promoted] * 2 + c[Piece_type.white]) - c[Piece_type.black_promoted] * 2 - c[
 		Piece_type.black]
 	return score
@@ -48,7 +47,7 @@ def alphabeta(node, depth, alpha=float("-inf"), beta=float("inf"), cache=None):
 	if node.white_plays:
 		bestvalue = alpha
 		for child in child_nodes:
-			ab_score = alphabeta(child, depth - 1, bestvalue, beta, cache=cache)  # , bla = ab_score2)
+			ab_score = alphabeta(child, depth - 1, bestvalue, beta, cache=cache)
 			bestvalue = max(bestvalue, ab_score)
 
 			if beta <= bestvalue:
@@ -58,8 +57,7 @@ def alphabeta(node, depth, alpha=float("-inf"), beta=float("inf"), cache=None):
 	else:
 		bestvalue = beta
 		for child in child_nodes:
-			ab_score = alphabeta(child, depth - 1, alpha, bestvalue, cache=cache)  # , bla = ab_score2)
-
+			ab_score = alphabeta(child, depth - 1, alpha, bestvalue, cache=cache)
 			bestvalue = min(bestvalue, ab_score)
 			if bestvalue <= alpha:
 				break
@@ -104,7 +102,6 @@ def alphabetapicker_nocache(next_level_moves, depth=6):
 def alphabetapicker(next_level_moves, depth=6, white_should_win = False):
 	next_level_boards = [move.get_board() for move in next_level_moves]
 	scores = [(b, alphabeta(b, depth)) for b in next_level_boards]
-	print(scores)
 	if white_should_win:
 		best = max(scores, key=lambda x: x[1])
 	else:

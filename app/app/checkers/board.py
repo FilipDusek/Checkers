@@ -1,5 +1,5 @@
-from enums import *
-from piece import Piece
+from .utils.enums import *
+from .piece import Piece
 import random
 
 def get_zobrist_vals(b):
@@ -27,8 +27,6 @@ class Board(object):
 		if board_state is not None:
 			self.state = [list(row) for row in board_state]
 			if apply_move is not None:
-				print("apply")
-				# print(apply_move.start_coord)
 				p = self.get_piece(apply_move.start_coord)
 				ptype = p.ptype
 
@@ -41,18 +39,14 @@ class Board(object):
 				if promote:
 					if ptype == Piece_type.white:
 						ptype = Piece_type.white_promoted
-						print(self)
 					if ptype == Piece_type.black:
 						ptype = Piece_type.black_promoted
-						print(self)
 
 				self._set_piece(apply_move.end_coord, ptype)
 				self._set_piece(apply_move.start_coord, None)
 
 				if apply_move.attacked is not None:
 					self._set_piece(apply_move.attacked, None)
-				if promote:
-					print(self)
 
 		else:
 			if self.size % 2 == 0:
@@ -66,14 +60,6 @@ class Board(object):
 						for y in range(5, self.size):
 							if self.is_valid_coord((x, y)):
 								self._set_piece((x, y), Piece_type.white)
-				# self._set_piece((3, 4), Piece_type.black)
-				# self._set_piece((1, 2), Piece_type.black)
-				# self._set_piece((0, 1), None)
-				# self._set_piece((5, 6), Piece_type.black)
-				# self._set_piece((3, 4), Piece_type.black)
-				# self._set_piece((4, 1), None)
-				# self._set_piece((0, 1), Piece_type.white)
-				# self._set_piece((1, 0), None)
 			else:
 				raise ValueError('Cannot create board with size {0}. Board size must be even number.'.format(self.size))
 		self.zobrist_vals = get_zobrist_vals(self)
@@ -96,7 +82,6 @@ class Board(object):
 				result += "  "
 			x_len = len(rot90)
 			for y in range(0, len(rot90[x])):
-				# print(y, end = "")
 				try:
 					result += "{0}   ".format(dct[rot90[x_len - 1 - x][y].ptype])
 				except AttributeError:
@@ -222,15 +207,11 @@ class Board(object):
 
 	def _set_piece(self, coord, piece):
 		x, y = coord
-		# print("before", x, "  ", y)
-		# self.bprint()
 		if self.is_valid_coord(coord):
 			if piece != None:
 				self.state[x // 2][y] = Piece(piece)
 			else:
 				self.state[x // 2][y] = None
-			# print("after")
-			# self.bprint()
 
 		else:
 			raise ValueError(
