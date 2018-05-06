@@ -19,7 +19,7 @@ function initBoard(boardData, boardSize){
         table += "</tr>";
     }
 
-	table += "</tbody>";
+	table += "</tbody>"; 
     var board = $("#chessboard");
 	board.append(table);
 	setBoardSize(board);
