@@ -2,10 +2,12 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y build-essential python-dev sudo && pip install uwsgi flask
 
-ENV FLASK_APP=./app/main.py
-ENV FLASK_DEBUG=1
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+

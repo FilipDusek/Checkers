@@ -1,3 +1,3 @@
-from ..checkers.board import Board
-from ..checkers.search import alphabetapicker
-from ..checkers.utils.utils import *
+from .board import Board
+from .search import alphabetapicker
+from .utils.utils import *

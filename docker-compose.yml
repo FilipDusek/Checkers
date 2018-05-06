@@ -1,8 +1,14 @@
 version: '2'
 services:
     checkers:
-      build: .
-      ports:
-        - "80:5000"
+      build: ./
       volumes:
         - ./app/:/usr/src/app
+    nginx:
+      image: nginx
+      volumes:
+        - ./app/static:/usr/share/nginx/html:ro
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      ports:
+        - 80:80
+
