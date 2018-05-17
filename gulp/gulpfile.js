@@ -33,6 +33,7 @@ gulp.task('sass', function () {
 
 gulp.task('copy', ['sass', 'scripts'], function(){
 	return gulp.src([
+		srcPath + "index.html",
 		srcPath + '**',
 		'!' + srcPath + 'static-src/{sass,sass/**}',
 		'!' + srcPath + 'app/static-src/{js,js/**}'

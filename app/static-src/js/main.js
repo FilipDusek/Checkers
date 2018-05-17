@@ -59,18 +59,23 @@ function boardToJson(){
 }
 
 function submitBoard(){
+	$("#loading, #loader-container").show();
 	jQuery.ajax ({
 		url: "solve",
 		type: "POST",
 		data: JSON.stringify(boardToJson()),
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
-		error: function(){ alert("Oops, there was a server error. Game was lost."); },
+		error: function(){ 
+			alert("Oops, there was a server error. Sorry!"); 
+			$("#loading, #loader-container").hide();
+		},
 		success: function(data){
 			console.log("Receiving data");
 			console.log(JSON.stringify(data));
 			initBoard(data, 8);
 			subscribeEvents($('#chessboard'));
+			$("#loading, #loader-container").hide();
 		}
 	});
 }
