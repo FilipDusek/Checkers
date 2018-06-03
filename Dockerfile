@@ -4,10 +4,12 @@ FROM node:9-alpine AS builder
 # Copy build scripts and source data to be built
 WORKDIR /usr/src/app/gulp
 COPY ./gulp ./
-COPY ./app/static-src ../app/static-src
 
 # Install dependencies for build script and run it
 RUN npm install
+
+COPY ./app/static-src ../app/static-src
+
 RUN npm run gulp copy
 
 # Import image that's going to be running the app
