@@ -1,19 +1,25 @@
+$field_black: #424B5C;
+$field_white: #F9F9F9;
+$piece_white: #E4DAD8;
+$piece_black: #00FF00;
+//$piece_black: #1F1919;
+
 #chessboard {
   tr {
     &:nth-child(even) td {
       &:nth-child(odd) {
-        background-color: #F9F9F9;
+        background-color: $field_white;
       }
       &:nth-child(even) {
-        background-color: #424B5C;
+        background-color: $field_black;
       }
     }
     &:nth-child(odd) td {
       &:nth-child(even) {
-        background-color: #F9F9F9;
+        background-color: $field_white;
       }
       &:nth-child(odd) {
-        background-color: #424B5C;
+        background-color: $field_black
       }
     }
   }
@@ -47,11 +53,11 @@ span.piece {
 }
 
 .black {
-  background-color: #1F1919;
+  background-color: $piece_black;
 }
 
 .white {
-  background-color: #E4DAD8;
+  background-color: $piece_white;
 }
 
 #source-code{
